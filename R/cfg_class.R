@@ -4,6 +4,8 @@ cfg <- R7::new_class(
     name = "cfg",
     package = "crossfitgames",
     properties = list(
+        competition = class_character,
+        year = class_integer,
         results = class_list
     )
 )

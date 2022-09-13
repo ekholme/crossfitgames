@@ -34,4 +34,6 @@ make_request <- function(comp, year, ...) {
     out <- httr2::resp_body_json(res)
 
     out
+
+    ##add class creation here
 }
