@@ -10,14 +10,28 @@ make_request <- function(comp, year, ...) {
     year <- as.integer(year)
 
     # checking size
-    vec_assert(comp, size = 1L)
-    vec_assert(year, size = 1L)
+    vctrs::vec_assert(comp, size = 1L)
+    vctrs::vec_assert(year, size = 1L)
 
     # adding in request parameters
     params <- list(...)
     
-    req <- request(base_url)
+    #constructing request
+    req <- httr2::request(base_url)
 
-    #RESUME HERE
+    #setting user agent
+    req <- httr2::req_user_agent(req, "https://github.com/ekholme/crossfitgames")
 
+    req <- httr2::req_url_path_append(req, comp)
+    req <- httr2::req_url_path_append(req, year)
+    req <- httr2::req_url_path_append(req, "leaderboards")
+    req <- httr2::req_url_query(req, !!!params)
+
+    #perform request
+    res <- httr2::req_perform(req)
+
+    # convert to json
+    out <- httr2::resp_body_json(res)
+
+    out
 }
