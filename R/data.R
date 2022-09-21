@@ -69,3 +69,12 @@ cfg_regions <- list(
     oceania = 32L,
     south_america = 33L
 )
+
+#' @keywords internal
+all_data <- list(
+    competition = cfg_competitions,
+    division = cfg_divisions,
+    region = cfg_regions,
+    scaled = cfg_scaled,
+    semifinal = cfg_semis
+)
