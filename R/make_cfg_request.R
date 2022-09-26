@@ -1,5 +1,13 @@
 #' Core Make Request Function
 #' 
+#' @description 
+#' This is mostly meant to be an internal function, although in some cases users may want to call it directly
+#' 
+#' @param competition A length-one character vector indicating the competition to query
+#' @param year A length-one integer vector indicating the year to query
+#' @param ... Additional parameters passed to the URL as a query string
+#' 
+#' @export
 
 make_cfg_request <- function(competition, year, ...) {
     base_url <- "https://c3po.crossfit.com/api/competitions/v2/competitions/"
