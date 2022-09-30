@@ -4,4 +4,6 @@
 #' @import rlang
 #' @import vctrs
 #' @import R7
+#' @import tibble
+#' @import purrr
 NULL
