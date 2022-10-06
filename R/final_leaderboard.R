@@ -21,11 +21,11 @@ extract_final_leaderboard <- new_generic("extract_final_leaderboard", "obj")
 #' }
 #'
 method(extract_final_leaderboard, cfg_leaderboard) <- function(obj) {
-    len <- seq_len(length(obj@results$leaderboardRows))
+    athletes <- seq_len(length(obj@results$leaderboardRows))
 
-    rs <- map_dbl(len, ~ pull_rank(obj, .x))
-    ss <- map_dbl(len, ~ pull_score(obj, .x))
-    nms <- map_chr(len, ~ pull_athlete_name(obj, .x))
+    rs <- map_dbl(athletes, ~ pull_rank(obj, .x))
+    ss <- map_dbl(athletes, ~ pull_score(obj, .x))
+    nms <- map_chr(athletes, ~ pull_athlete_name(obj, .x))
     
     ret <- tibble(
         rank = rs,

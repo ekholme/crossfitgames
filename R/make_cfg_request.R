@@ -48,7 +48,7 @@ make_cfg_request <- function(competition, year, ...) {
         competition = competition,
         year = year,
         query_parameters = params,
-        result = out
+        results = out
     )
 
 }
