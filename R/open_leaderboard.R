@@ -30,23 +30,4 @@ open_leaderboard <- function(year, division = c("men", "women", "teams"), athlet
 
     res
 
-    #a better approach here will be to include a search athlete id function and require the athlete id to be passed in here
-    # if (!is.null(athlete)) {
-    #     vec_assert(athlete, size = 1L)
-
-    #     ath <- gsub(" ", "%20", athlete)
-        
-    #     ath_url <- paste0("https://games.crossfit.com/competitions/api/v1/competitions/open/", year, "/athletes?term=", ath, "&division=", div)
-
-    #     req <- request(ath_url)
-
-    #     req <- req_user_agent(req, "https://github.com/ekholme/crossfitgames")
-
-    #     res <- req_perform(req)
-
-    #     out <- resp_body_json(res)
-
-    #     out
-    # }
-
 }

@@ -17,7 +17,7 @@ A 5-column tibble including
 }
 }
 \description{
-Extract individual workout results
+Extract individual workout results from a \code{cfg_leaderboard} object
 }
 \examples{
 \dontrun{
