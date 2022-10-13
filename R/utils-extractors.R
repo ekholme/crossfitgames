@@ -19,11 +19,18 @@ iterate_workouts <- function(obj, workout_num, athlete) {
 
     tmp <- obj@results$leaderboardRows[[athlete]]$scores[[workout_num]]
 
+    #points work differently in semis and games than in open/quarters
+    pts <- if (obj@competition %in% c("games", "semifinals")) {
+        as.numeric(tmp$score)
+    } else {
+        as.numeric(tmp$rank)
+    }
+
     res <- tibble(
         athlete = ath_name,
         workout_num = workout_num,
         workout_place = as.numeric(tmp$rank),
-        points = as.numeric(tmp$score),
+        points = pts,
         score = tmp$scoreDisplay
 
     )
