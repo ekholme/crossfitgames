@@ -25,7 +25,7 @@
 #' lh_open <- open_leaderboard(2022, division = "women", athlete = lh)
 #' }
 #'
-open_leaderboard <- function(year, division = c("men", "women", "teams"), athlete = NULL, ...) {
+open_leaderboard <- function(year, division = c("men", "women", "teams"), athlete = NULL, top_n = 50, ...) {
 
     #division checks
     division <- match.arg(division)
