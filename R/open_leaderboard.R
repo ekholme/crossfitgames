@@ -19,13 +19,24 @@
 #' 
 #' north_am_women <- open_leaderboard(2022, division = "women", region = 31)
 #' 
+#' #the default is to return the top 50 finishers; if you want more than that, you can specify the number
+#' top_200_w <- open_leaderboard(2022, division = "women", top_n = 200)
+#' 
 #' #specifying an individual athlete with an id number
 #' #the number provided corresponds to laura horvath
+#' #note that this returns a list
 #' lh <- 591912
 #' lh_open <- open_leaderboard(2022, division = "women", athlete = lh)
 #' }
 #'
 open_leaderboard <- function(year, division = c("men", "women", "teams"), athlete = NULL, top_n = 50, ...) {
+
+    #check top_n value
+    if (is.null(athlete) && top_n %% 50 != 0) {
+        abort(paste0("`top_n` must be a multiple of 50"))
+    }
+
+    pgs <- top_n %/% 50
 
     #division checks
     division <- match.arg(division)
@@ -48,10 +59,18 @@ open_leaderboard <- function(year, division = c("men", "women", "teams"), athlet
 
         pulled
 
-    } else {
+    } else if (pgs == 1) {
 
         make_cfg_request(competition = comp, year = year, division = div, ...)
 
+    } else {
+        multi_page_cfg_request(
+            competition = comp,
+            year = year,
+            n_pages = pgs,
+            division = div,
+            ...
+        )
     }
 
     res

@@ -82,17 +82,37 @@ class_cfg_request <- function(res, comp, year, params) {
 #multiple page cfg request
 #useful for open and qf
 #work in progress
+#TODO
+#add documentation
 multi_page_cfg_request <- function(competition, year, n_pages,...) {
     n <- seq_len(n_pages)
 
-    tmp <- list()
+    # TODO
+    # avoid for loop eventually?
+    tmp <- vector(mode = "list", length = n_pages)
 
     for (i in n) {
         tmp[[i]] <- base_make_request(competition, year, page = i, ...)
     }
 
-    tmp
-    #this gets me most of the way there, but then I need to clean up the
-    #metadata at the beginning of the returned object
-    #and also need to combine the "leaderboardRows" components of each list element
+    lb_r <- reduce(transpose(tmp)$leaderboardRows, append)
+
+    res <- tmp[[1]]
+
+    res$leaderboardRows <- lb_r
+
+    params <- list(...)
+
+    year <- as.integer(year)
+
+    class_cfg_request(
+            res,
+            competition,
+            year,
+            params
+        )
+
+    #TODO
+    #clean up metadata at beginning of result
+    #although this isn't terribly important bc I'm not using it
 }

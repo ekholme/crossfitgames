@@ -33,11 +33,27 @@ devtools::install_github("ekholme/crossfitgames")
 
 ## Example
 
-*TODO*
+You might want to get final results from the Crossfit games in a given year. For example, you can get the data from the 2022 games for the women's division via the `games_leaderboard()` function.
 
 ```{r example}
 library(crossfitgames)
-## basic example code
+
+women_22 <- games_leaderboard(2022, "women")
+```
+
+This will return a `cfg_leaderboard` R7 object. You can use methods associated with this object to extract more usable data:
+
+```{r}
+#will get the final leaderboard
+final_lb <- extract_final_leaderboard(women_22)
+
+head(final_lb)
 ```
 
 
+```{r}
+#will get event results for each athlete
+event_results <- extract_workout_results(women_22)
+
+head(event_results)
+```
