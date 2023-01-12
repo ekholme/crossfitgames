@@ -39,6 +39,8 @@ jobs:
       - name: Install dependencies action
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
+          packages: |
+            httr2, rlang, tibble, vctrs, purrr
           extra-packages: any::pkgdown, local::.
           needs: website
 
