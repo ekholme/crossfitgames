@@ -96,7 +96,7 @@ multi_page_cfg_request <- function(competition, year, n_pages,...) {
         tmp[[i]] <- base_make_request(competition, year, page = i, ...)
     }
 
-    lb_r <- reduce(transpose(tmp)$leaderboardRows, append)
+    lb_r <- purrr::reduce(purrr::transpose(tmp)$leaderboardRows, append)
 
     res <- tmp[[1]]
 

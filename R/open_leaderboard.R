@@ -51,7 +51,7 @@ open_leaderboard <- function(year, division = c("men", "women", "teams"), athlet
 
         iter <- seq_len(length(tmp@results$leaderboardRows))
 
-        ind <- map_lgl(iter, function(x) {
+        ind <- purrr::map_lgl(iter, function(x) {
             tmp@results$leaderboardRows[[x]]$entrant$competitorId == athlete
         })
 

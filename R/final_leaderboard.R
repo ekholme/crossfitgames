@@ -1,5 +1,5 @@
 #create a generic to extract the final leaderboard
-extract_final_leaderboard <- new_generic("extract_final_leaderboard", "obj")
+extract_final_leaderboard <- R7::new_generic("extract_final_leaderboard", "obj")
 
 #' Extract Final Leaderboard
 #'
@@ -20,12 +20,12 @@ extract_final_leaderboard <- new_generic("extract_final_leaderboard", "obj")
 #' lb <- extract_final_leaderboard(women_22)
 #' }
 #'
-method(extract_final_leaderboard, cfg_leaderboard) <- function(obj) {
+R7::method(extract_final_leaderboard, cfg_leaderboard) <- function(obj) {
     athletes <- seq_len(length(obj@results$leaderboardRows))
 
-    rs <- map_dbl(athletes, ~ pull_rank(obj, .x))
-    ss <- map_dbl(athletes, ~ pull_score(obj, .x))
-    nms <- map_chr(athletes, ~ pull_athlete_name(obj, .x))
+    rs <- purrrr::map_dbl(athletes, ~ pull_rank(obj, .x))
+    ss <- purrrr::map_dbl(athletes, ~ pull_score(obj, .x))
+    nms <- purrrr::map_chr(athletes, ~ pull_athlete_name(obj, .x))
     
     ret <- tibble(
         rank = rs,

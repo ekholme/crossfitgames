@@ -1,5 +1,5 @@
 # create a generic to extract individual workout results
-extract_workout_results <- new_generic("extract_workout_results", "obj")
+extract_workout_results <- R7::new_generic("extract_workout_results", "obj")
 
 #' Extract Workout Results
 #'
@@ -27,7 +27,7 @@ extract_workout_results <- new_generic("extract_workout_results", "obj")
 #' indiv_results <- extract_workout_results(women_22)
 #' }
 #'
-method(extract_workout_results, cfg_leaderboard) <- function(obj) {
+R7::method(extract_workout_results, cfg_leaderboard) <- function(obj) {
 
     workout_nums <- seq_len(length(obj@results$ordinals))
 
@@ -37,7 +37,7 @@ method(extract_workout_results, cfg_leaderboard) <- function(obj) {
 
     names(iter) <- c("workout_num", "athlete")
 
-    res <- pmap_dfr(iter, ~iterate_workouts(obj, ..1, ..2))
+    res <- purrr::pmap_dfr(iter, ~iterate_workouts(obj, ..1, ..2))
 
     res
 
