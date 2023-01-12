@@ -12,6 +12,7 @@ crossfitgames provides high- and low-level functions to retrieve data from the C
 Useful links:
 \itemize{
   \item \url{https://github.com/ekholme/crossfitgames}
+  \item \url{https://ekholme.github.io/crossfitgames/}
   \item Report bugs at \url{https://github.com/ekholme/crossfitgames/issues}
 }
 

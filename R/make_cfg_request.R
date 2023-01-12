@@ -7,7 +7,9 @@
 #' @param year A length-one integer vector indicating the year to query
 #' @param page A length-one integer vectory indicating the page to query. Useful for getting data from the open or the quarterfinals where there are more than 50 competitors.
 #' @param ... Additional parameters passed to the URL as a query string
-#' 
+#'
+#' @name cfg-request
+#'  
 #' @export
 
 make_cfg_request <- function(competition, year, page = 1, ...) {
@@ -27,6 +29,7 @@ make_cfg_request <- function(competition, year, page = 1, ...) {
 
 }
 
+#internal
 base_make_request <- function(competition, year, page = 1, ...) {
         base_url <- "https://c3po.crossfit.com/api/competitions/v2/competitions/"
 
@@ -70,6 +73,7 @@ base_make_request <- function(competition, year, page = 1, ...) {
         out
 }
 
+#internal to construct the cfg class from query
 class_cfg_request <- function(res, comp, year, params) {
         cfg_leaderboard(
             competition = comp,
@@ -79,11 +83,8 @@ class_cfg_request <- function(res, comp, year, params) {
         )
 }
 
-#multiple page cfg request
-#useful for open and qf
-#work in progress
-#TODO
-#add documentation
+#' @rdname cfg-request
+#' @export
 multi_page_cfg_request <- function(competition, year, n_pages,...) {
     n <- seq_len(n_pages)
 
