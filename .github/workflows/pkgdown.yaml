@@ -30,14 +30,17 @@ jobs:
 
 
       - name: Install dependencies
+        run: |
+          install.packages("remotes", repos='http://cran.us.r-project.org')
+          remotes::install_deps(dependencies = TRUE)
+          remotes::install_github("rconsortium/OOP-WG")
+        shell: Rscript {0}
+
+      - name: Install dependencies action
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
           extra-packages: any::pkgdown, local::.
           needs: website
-        run: |
-        install.packages("remotes", repos='http://cran.us.r-project.org')
-        remotes::install_deps(dependencies = TRUE)
-        remotes::install_github("rconsortium/OOP-WG")
 
       - name: Build site
         run: pkgdown::build_site_github_pages(new_process = FALSE, install = FALSE)
