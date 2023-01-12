@@ -40,8 +40,8 @@ jobs:
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
           packages: |
-            httr2, rlang, tibble, vctrs, purrr
-          extra-packages: any::pkgdown, local::.
+            deps::httr2, deps::rlang, deps::tibble, deps::vctrs, deps::purrr
+          extra-packages: any::pkgdown 
           needs: website
 
       - name: Build site
