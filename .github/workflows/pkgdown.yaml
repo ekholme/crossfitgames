@@ -37,12 +37,7 @@ jobs:
         shell: Rscript {0}
 
       - name: Install dependencies action
-        uses: r-lib/actions/setup-r-dependencies@v2
-        with:
-          packages: |
-            deps::httr2, deps::rlang, deps::tibble, deps::vctrs, deps::purrr
-          extra-packages: any::pkgdown 
-          needs: website
+        run: Rscript -e 'install.packages(c("httr2", "rlang", "tibble", "vctrs", "purrr", "pkgdown"))'
 
       - name: Build site
         run: pkgdown::build_site_github_pages(new_process = FALSE, install = FALSE)

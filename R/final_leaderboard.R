@@ -1,32 +1,32 @@
-#create a generic to extract the final leaderboard
+# create a generic to extract the final leaderboard
 extract_final_leaderboard <- R7::new_generic("extract_final_leaderboard", "obj")
 
 #' Extract Final Leaderboard
 #'
-#' @description 
-#' Extract the final leaderboard 
+#' @description
+#' Extract the final leaderboard
 #'
-#'@param obj A `cfg_leaderboard` object
+#' @param obj A `cfg_leaderboard` object
 #'
-#'@return 
+#' @return
 #' A 3-column tibble with the rank, name, and total points of competitors
-#' 
-#'@name extract_final_leaderboard
-#'@export
 #'
-#'@examples \dontrun{
+#' @name extract_final_leaderboard
+#' @export
+#'
+#' @examples \dontrun{
 #' women_22 <- games_leaderboard(2022, "women")
-#' 
+#'
 #' lb <- extract_final_leaderboard(women_22)
 #' }
 #'
 R7::method(extract_final_leaderboard, cfg_leaderboard) <- function(obj) {
     athletes <- seq_len(length(obj@results$leaderboardRows))
 
-    rs <- purrrr::map_dbl(athletes, ~ pull_rank(obj, .x))
-    ss <- purrrr::map_dbl(athletes, ~ pull_score(obj, .x))
-    nms <- purrrr::map_chr(athletes, ~ pull_athlete_name(obj, .x))
-    
+    rs <- purrr::map_dbl(athletes, ~ pull_rank(obj, .x))
+    ss <- purrr::map_dbl(athletes, ~ pull_score(obj, .x))
+    nms <- purrr::map_chr(athletes, ~ pull_athlete_name(obj, .x))
+
     ret <- tibble(
         rank = rs,
         athlete = nms,

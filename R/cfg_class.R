@@ -1,5 +1,5 @@
-#creating classes for CFG requests to use in helper functions
-#will be helpful to refine properties later
+# creating classes for CFG requests to use in helper functions
+# will be helpful to refine properties later
 cfg_leaderboard <- R7::new_class(
     name = "cfg_leaderboard",
     package = "crossfitgames",
