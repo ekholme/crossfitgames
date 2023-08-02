@@ -37,9 +37,9 @@ base_make_request <- function(competition, year, page = 1, ...) {
     page <- as.integer(page)
 
     # checking size
-    vec_assert(competition, size = 1L)
-    vec_assert(year, size = 1L)
-    vec_assert(page, size = 1L)
+    vctrs::vec_assert(competition, size = 1L)
+    vctrs::vec_assert(year, size = 1L)
+    vctrs::vec_assert(page, size = 1L)
 
     # adding in page parameter -- useful for open and quarterfinals
     pg <- list(page = page)
@@ -50,23 +50,23 @@ base_make_request <- function(competition, year, page = 1, ...) {
     check_query_args(params)
 
     # constructing request
-    req <- request(base_url)
+    req <- httr2::request(base_url)
 
     # setting user agent
-    req <- req_user_agent(req, "https://github.com/ekholme/crossfitgames")
+    req <- httr2::req_user_agent(req, "https://github.com/ekholme/crossfitgames")
 
     # finish constructing request
-    req <- req_url_path_append(req, competition)
-    req <- req_url_path_append(req, year)
-    req <- req_url_path_append(req, "leaderboards")
-    req <- req_url_query(req, !!!pg)
-    req <- req_url_query(req, !!!params)
+    req <- httr2::req_url_path_append(req, competition)
+    req <- httr2::req_url_path_append(req, year)
+    req <- httr2::req_url_path_append(req, "leaderboards")
+    req <- httr2::req_url_query(req, !!!pg)
+    req <- httr2::req_url_query(req, !!!params)
 
     # perform request
-    res <- req_perform(req)
+    res <- httr2::req_perform(req)
 
     # convert to json
-    out <- resp_body_json(res)
+    out <- httr2::resp_body_json(res)
 
     out
 }
@@ -86,8 +86,6 @@ cfg_request <- function(res, comp, year, params) {
 multi_page_cfg_request <- function(competition, year, n_pages, ...) {
     n <- seq_len(n_pages)
 
-    # TODO
-    # avoid for loop eventually?
     tmp <- vector(mode = "list", length = n_pages)
 
     for (i in n) {
