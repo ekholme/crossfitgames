@@ -1,12 +1,18 @@
-# creating classes for CFG requests to use in helper functions
-# will be helpful to refine properties later
-cfg_leaderboard <- R7::new_class(
-    name = "cfg_leaderboard",
-    package = "crossfitgames",
-    properties = list(
-        competition = R7::class_character,
-        year = R7::class_integer,
-        query_parameters = R7::class_list,
-        results = R7::class_list
+# document later
+new_cfg_leaderboard <- function(competition, year, query_parameters, results) {
+    # checks
+    stopifnot(is.character(competition))
+    stopifnot(is.integer(year))
+    stopifnot(is.list(query_parameters))
+    stopifnot(is.list(results))
+
+    structure(
+        list(
+            competition = competition,
+            year = year,
+            query_parameters = query_parameters,
+            results = results
+        ),
+        class = "cfg_leaderboard"
     )
-)
+}

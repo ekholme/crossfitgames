@@ -2,7 +2,11 @@
 % Please edit documentation in R/final_leaderboard.R
 \name{extract_final_leaderboard}
 \alias{extract_final_leaderboard}
+\alias{extract_final_leaderboard.cfg_leaderboard}
 \title{Extract Final Leaderboard}
+\usage{
+\method{extract_final_leaderboard}{cfg_leaderboard}(obj)
+}
 \arguments{
 \item{obj}{A \code{cfg_leaderboard} object}
 }
