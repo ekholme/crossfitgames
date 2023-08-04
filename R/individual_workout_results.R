@@ -1,3 +1,19 @@
+#' @rdname extract_workout_results
+#' @export
+extract_workout_results.cfg_leaderboard <- function(obj) {
+    workout_nums <- seq_len(length(obj$results$ordinals))
+
+    athletes <- seq_len(length(obj$results$leaderboardRows))
+
+    iter <- expand.grid(workout_nums, athletes)
+
+    names(iter) <- c("workout_num", "athlete")
+
+    res <- purrr::pmap_dfr(iter, ~ iterate_workouts(obj, ..1, ..2))
+
+    res
+}
+
 #' Extract Workout Results
 #'
 #' @description
@@ -15,9 +31,6 @@
 #' \item{score}{Recorded score for workout in time, weight, reps, etc}
 #' }
 #'
-#' @name extract_workout_results
-#' @method extract_workout_results cfg_leaderboard
-#' @export extract_workout_results.cfg_leaderboard
 #' @export
 #'
 #' @examples \dontrun{
@@ -26,21 +39,6 @@
 #' indiv_results <- extract_workout_results(women_22)
 #' }
 #'
-extract_workout_results.cfg_leaderboard <- function(obj) {
-    workout_nums <- seq_len(length(obj$results$ordinals))
-
-    athletes <- seq_len(length(obj$results$leaderboardRows))
-
-    iter <- expand.grid(workout_nums, athletes)
-
-    names(iter) <- c("workout_num", "athlete")
-
-    res <- purrr::pmap_dfr(iter, ~ iterate_workouts(obj, ..1, ..2))
-
-    res
-}
-
-# create generic to extract individual workout results
 extract_workout_results <- function(x) {
     UseMethod("extract_workout_results")
 }

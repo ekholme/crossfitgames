@@ -16,15 +16,17 @@ knitr::opts_chunk$set(
 # crossfitgames
 
 <!-- badges: start -->
+![GitHub last commit](https://img.shields.io/github/last-commit/ekholme/crossfitgames)
+[![R-CMD-check](https://github.com/ekholme/crossfitgames/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ekholme/crossfitgames/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-`{crossfitgames}` provides high-level functionality for retrieving data from the Crossfit Games API. It also provides some lower-level functionality for making requests to this API (if users prefer this level of access) as well as helper functions for accessing, reshaping, and cleaning data retrieved from the API.
+`{crossfitgames}` provides high-level functionality for retrieving data from the Crossfit Games API. It's still a work-in-progress, but the basic functionality is there to get data from the Games. I'll ge adding functionality to retrieve data from other competitions as well as functions to manipulate data from request results.
 
-It is loosely inspired by [Davis Vaughan's {crossfit} package](https://github.com/DavisVaughan/crossfit), which also provides functionality for accessing data from the Crossfit API.
+It is loosely inspired by [Davis Vaughan's {crossfit} package](https://github.com/DavisVaughan/crossfit), which also provides functionality for retrieving data from the Crossfit API.
 
 ## Installation
 
-You can install the development version of crossfitgames from [GitHub](https://github.com/) with:
+You can install the development version of crossfitgames from github with:
 
 ``` r
 # install.packages("devtools")
@@ -41,10 +43,10 @@ library(crossfitgames)
 women_22 <- games_leaderboard(2022, "women")
 ```
 
-This will return a `cfg_leaderboard` R7 object. You can use methods associated with this object to extract more usable data:
+This will return a `cfg_leaderboard` S3 object. You can use methods associated with this object to extract more usable data:
 
 ```{r}
-#will get the final leaderboard
+# will get the final leaderboard
 final_lb <- extract_final_leaderboard(women_22)
 
 head(final_lb)
@@ -52,7 +54,7 @@ head(final_lb)
 
 
 ```{r}
-#will get event results for each athlete
+# will get event results for each athlete
 event_results <- extract_workout_results(women_22)
 
 head(event_results)

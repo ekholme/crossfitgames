@@ -29,17 +29,17 @@ Retrieve a Crossfit Open leaderboard from the Crossfit API. Functions to further
 }
 \examples{
 \dontrun{
-#will return the top 50 athletes
+# will return the top 50 athletes
 men_22 <- open_leaderboard(2022, division = "men")
 
 north_am_women <- open_leaderboard(2022, division = "women", region = 31)
 
-#the default is to return the top 50 finishers; if you want more than that, you can specify the number
+# the default is to return the top 50 finishers; if you want more than that, you can specify the number
 top_200_w <- open_leaderboard(2022, division = "women", top_n = 200)
 
-#specifying an individual athlete with an id number
-#the number provided corresponds to laura horvath
-#note that this returns a list
+# specifying an individual athlete with an id number
+# the number provided corresponds to laura horvath
+# note that this returns a list
 lh <- 591912
 lh_open <- open_leaderboard(2022, division = "women", athlete = lh)
 }

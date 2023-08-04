@@ -4,22 +4,26 @@
 # crossfitgames
 
 <!-- badges: start -->
+
+![GitHub last
+commit](https://img.shields.io/github/last-commit/ekholme/crossfitgames)
+[![R-CMD-check](https://github.com/ekholme/crossfitgames/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ekholme/crossfitgames/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 `{crossfitgames}` provides high-level functionality for retrieving data
-from the Crossfit Games API. It also provides some lower-level
-functionality for making requests to this API (if users prefer this
-level of access) as well as helper functions for accessing, reshaping,
-and cleaning data retrieved from the API.
+from the Crossfit Games API. It’s still a work-in-progress, but the
+basic functionality is there to get data from the Games. I’ll ge adding
+functionality to retrieve data from other competitions as well as
+functions to manipulate data from request results.
 
 It is loosely inspired by [Davis Vaughan’s {crossfit}
 package](https://github.com/DavisVaughan/crossfit), which also provides
-functionality for accessing data from the Crossfit API.
+functionality for retrieving data from the Crossfit API.
 
 ## Installation
 
-You can install the development version of crossfitgames from
-[GitHub](https://github.com/) with:
+You can install the development version of crossfitgames from github
+with:
 
 ``` r
 # install.packages("devtools")
@@ -34,35 +38,17 @@ women’s division via the `games_leaderboard()` function.
 
 ``` r
 library(crossfitgames)
-#> Warning: replacing previous import 'purrr::invoke' by 'rlang::invoke' when
-#> loading 'crossfitgames'
-#> Warning: replacing previous import 'purrr::flatten_raw' by 'rlang::flatten_raw'
-#> when loading 'crossfitgames'
-#> Warning: replacing previous import 'purrr::flatten_dbl' by 'rlang::flatten_dbl'
-#> when loading 'crossfitgames'
-#> Warning: replacing previous import 'purrr::flatten_lgl' by 'rlang::flatten_lgl'
-#> when loading 'crossfitgames'
-#> Warning: replacing previous import 'purrr::flatten_int' by 'rlang::flatten_int'
-#> when loading 'crossfitgames'
-#> Warning: replacing previous import 'purrr::%@%' by 'rlang::%@%' when loading
-#> 'crossfitgames'
-#> Warning: replacing previous import 'purrr::flatten_chr' by 'rlang::flatten_chr'
-#> when loading 'crossfitgames'
-#> Warning: replacing previous import 'purrr::splice' by 'rlang::splice' when
-#> loading 'crossfitgames'
-#> Warning: replacing previous import 'purrr::flatten' by 'rlang::flatten' when
-#> loading 'crossfitgames'
 #> Warning: replacing previous import 'tibble::data_frame' by 'vctrs::data_frame'
 #> when loading 'crossfitgames'
 
 women_22 <- games_leaderboard(2022, "women")
 ```
 
-This will return a `cfg_leaderboard` R7 object. You can use methods
+This will return a `cfg_leaderboard` S3 object. You can use methods
 associated with this object to extract more usable data:
 
 ``` r
-#will get the final leaderboard
+# will get the final leaderboard
 final_lb <- extract_final_leaderboard(women_22)
 
 head(final_lb)
@@ -78,7 +64,7 @@ head(final_lb)
 ```
 
 ``` r
-#will get event results for each athlete
+# will get event results for each athlete
 event_results <- extract_workout_results(women_22)
 
 head(event_results)
